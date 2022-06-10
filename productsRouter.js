@@ -2,6 +2,8 @@ const { Router } = require('express')
 const fs = require('fs')
 
 const isAdmin = false
+
+//=== Middleware para verificación de usuario administrador
 const adminCheck = (req, res, next) => {
     if (isAdmin) {
         next()
@@ -13,6 +15,7 @@ const adminCheck = (req, res, next) => {
 }
 const productsRouter = Router()
 
+//=== Ver todos los productos
 productsRouter.get('/', (req, res) => {
     console.log(req.url)
     let dataProducts
@@ -26,6 +29,7 @@ productsRouter.get('/', (req, res) => {
     return res.json(dataProducts)
 })
 
+//=== Ver un producto específico con su id
 productsRouter.get('/:id', (req, res) => {
     const id = Number(req.params.id)
     let dataProducts
@@ -45,6 +49,7 @@ productsRouter.get('/:id', (req, res) => {
     return res.json(product)
 })
 
+//=== Crear un nuevo registro de producto
 productsRouter.post('/', adminCheck, (req, res) => {
     const newProduct = req.body
     let dataProducts
@@ -63,6 +68,7 @@ productsRouter.post('/', adminCheck, (req, res) => {
     return res.status(201).json(newProduct)
 })
 
+//=== Modificar un registro de producto existente
 productsRouter.put('/:id', adminCheck, (req, res) => {
     const id = Number(req.params.id)
     let dataProducts
@@ -88,6 +94,7 @@ productsRouter.put('/:id', adminCheck, (req, res) => {
     return res.json(dataProducts[productIndex])
 })
 
+//=== Eliminar un registro de producto
 productsRouter.delete('/:id', adminCheck, (req, res) => {
     const id = Number(req.params.id)
     let dataProducts

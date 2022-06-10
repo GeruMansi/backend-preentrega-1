@@ -1,8 +1,6 @@
 const { Router } = require('express')
 const fs = require('fs')
 
-const carts = []
-
 const cartRouter = Router()
 
 //=== Crear un nuevo carrito

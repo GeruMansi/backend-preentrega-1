@@ -46,6 +46,7 @@ cartRouter.delete('/:id', (req, res) => {
 
 //=== Listar productos de un carrito con id.
 cartRouter.get('/:id/productos', (req, res) => {
+    console.log(req.url)
     const id = Number(req.params.id)
     let dataCarts
     try {

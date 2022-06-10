@@ -11,6 +11,7 @@ app.use('/api/productos', productsRouter)
 app.use('/api/carrito', cartRouter)
 
 app.get('/', (req, res) => {
+    console.log(req.url)
     return res.json({ status: 'ok' })
 })
 

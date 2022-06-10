@@ -1,9 +1,20 @@
 const { Router } = require('express')
 const fs = require('fs')
 
+const isAdmin = false
+const adminCheck = (req, res, next) => {
+    if (isAdmin) {
+        next()
+    }
+    return res.json({
+        error: -1,
+        descripcion: `ruta ${req.method}/api/productos no autorizada`
+    })
+}
 const productsRouter = Router()
 
 productsRouter.get('/', (req, res) => {
+    console.log(req.url)
     let dataProducts
     try {
         dataProducts = fs.readFileSync('./products.json', 'utf-8')
@@ -34,7 +45,7 @@ productsRouter.get('/:id', (req, res) => {
     return res.json(product)
 })
 
-productsRouter.post('/', (req, res) => {
+productsRouter.post('/', adminCheck, (req, res) => {
     const newProduct = req.body
     let dataProducts
     try {
@@ -52,7 +63,7 @@ productsRouter.post('/', (req, res) => {
     return res.status(201).json(newProduct)
 })
 
-productsRouter.put('/:id', (req, res) => {
+productsRouter.put('/:id', adminCheck, (req, res) => {
     const id = Number(req.params.id)
     let dataProducts
     try {
@@ -77,7 +88,7 @@ productsRouter.put('/:id', (req, res) => {
     return res.json(dataProducts[productIndex])
 })
 
-productsRouter.delete('/:id', (req, res) => {
+productsRouter.delete('/:id', adminCheck, (req, res) => {
     const id = Number(req.params.id)
     let dataProducts
     try {

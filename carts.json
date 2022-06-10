@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "timestamp": 1654820073063,
+    "productos": [
+      {
+        "nombre": "Joystick",
+        "descripcion": "Joystick inalámbrico Redragon Harrow",
+        "precio": "3000",
+        "foto": "https://s3-sa-east-1.amazonaws.com/saasargentina/NSNrDp5ac8TYG4KM0hGj/imagen",
+        "stock": 2,
+        "id": 1,
+        "timeStamp": 1654817951104,
+        "codigo": "Joystick1"
+      }
+    ]
+  }
+]
